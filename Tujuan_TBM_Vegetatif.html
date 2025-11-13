@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Upkeep TBM - TBM Vegetatif</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #0b1220;
+      --panel: #0f172a;
+      --muted: #f5f6f9;
+      --accent: #16a34a;
+      --accent2: #22c55e;
+      --glass: rgba(255,255,255,0.03);
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.25s ease; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #071229 0%, #081a2a 60%);
+      color: #e6eef6;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    header h3 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    header p {
+      color: #a0aec0;
+      font-size: 0.9rem;
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    header button:hover {
+      background: var(--accent2);
+      transform: scale(1.05);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+      padding: 28px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .accent-bar {
+      height: 6px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    section.card {
+      position: relative;
+      background: linear-gradient(180deg, var(--card), var(--panel));
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+      overflow: hidden;
+    }
+
+    /* Accent hijau di bagian atas setiap card */
+    section.card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 10px rgba(34,197,94,0.6);
+    }
+
+    h2.section-title {
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    p.lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+
+    ol, ul {
+      margin-left: 1.2rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+
+    li {
+      margin-bottom: 0.6rem;
+      color: #e6eef6;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .note {
+      background: var(--glass);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+      margin-top: 1rem;
+    }
+
+    /* Tombol Salin */
+    .copy-btn {
+      display: inline-block;
+      background: rgba(34,197,94,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(22,163,74,0.5);
+    }
+
+    .copy-btn:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    .copy-btn.copied {
+      background: #15803d;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h3>Manajemen Budidaya Kelapa Sawit</h3>
+      <p>STIK-BPDPKS 23</p>
+    </div>
+    <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+  </header>
+
+  <div class="container">
+    <h1>TBM - Vegetatif</h1>
+    <div class="accent-bar"></div>
+
+    <section class="card" id="pengertian">
+      <h2 class="section-title">1. Pengertian TBM - Vegetatif</h2>
+      <p class="lead">
+        TBM (Tanaman Belum Menghasilkan) merupakan fase pertumbuhan kelapa sawit sejak bibit ditanam di lapangan hingga tanaman mulai memasuki masa generatif (berbunga dan berbuah). Fase <strong>vegetatif</strong> adalah tahap awal dalam TBM, di mana fokus utamanya adalah pembentukan struktur vegetatif tanaman — akar, batang, dan daun — yang sehat dan kuat.
+      </p>
+    </section>
+
+    <section class="card" id="tujuan">
+      <h2 class="section-title">2. Tujuan TBM - Vegetatif</h2>
+      <p class="lead">Tujuan utama dari fase TBM-vegetatif adalah mempersiapkan tanaman agar mampu berproduksi optimal saat memasuki fase generatif (TM). Secara rinci meliputi:</p>
+      <ol>
+        <li><strong>a. Mendorong pertumbuhan akar yang kuat dan luas</strong>
+          <div class="sub">Akar yang baik meningkatkan penyerapan air dan unsur hara serta meningkatkan ketahanan terhadap kekeringan dan angin.</div>
+        </li>
+        <li><strong>b. Meningkatkan pertumbuhan batang dan daun secara seimbang</strong>
+          <div class="sub">Batang yang kokoh diperlukan untuk menopang pelepah dan tandan buah; daun yang sehat meningkatkan fotosintesis.</div>
+        </li>
+        <li><strong>c. Membangun sistem fisiologis tanaman yang optimal</strong>
+          <div class="sub">Pengelolaan air, nutrisi, dan cahaya yang baik menjaga metabolisme tanaman sehingga menentukan potensi produksi masa depan.</div>
+        </li>
+        <li><strong>d. Menjaga kesehatan tanaman dari gangguan OPT</strong>
+          <div class="sub">Perlindungan dini terhadap hama, penyakit, dan gulma agar pertumbuhan vegetatif tidak terganggu.</div>
+        </li>
+        <li><strong>e. Menyiapkan struktur tanaman yang ideal untuk pembentukan bunga dan buah</strong>
+          <div class="sub">Pertumbuhan vegetatif yang baik menjadi dasar pembentukan jaringan generatif sehingga TM dimulai dalam kondisi siap berproduksi.</div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card" id="fokus">
+      <h2 class="section-title">3. Fokus Kegiatan pada Fase TBM - Vegetatif</h2>
+      <p class="lead">Kegiatan utama yang perlu dijalankan untuk mencapai tujuan fase vegetatif:</p>
+      <ul>
+        <li><strong>Pemeliharaan tanaman</strong> — penyulaman, penegakan, penunasan ringan.</li>
+        <li><strong>Pemupukan teratur</strong> — mengikuti rekomendasi dosis dan waktu aplikasinya.</li>
+        <li><strong>Pengendalian gulma, hama, dan penyakit (HPT)</strong> — pengamatan rutin dan tindakan cepat.</li>
+        <li><strong>Pengelolaan air (water management)</strong> — drainase, penampungan air, dan pengaturan kelembapan tanah.</li>
+        <li><strong>Pemeliharaan jalan dan drainase kebun</strong> — untuk akses operasional dan kelancaran aliran air.</li>
+        <li><strong>Pemasangan penutup tanah (cover crop)</strong> — menjaga kelembapan dan meningkatkan kesuburan tanah.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="kesimpulan">
+      <h2 class="section-title">4. Kesimpulan</h2>
+      <p class="lead">
+        Fase TBM-vegetatif adalah fondasi utama produktivitas kebun kelapa sawit. Tujuan utamanya adalah membentuk tanaman yang kuat, sehat, dan siap memasuki fase produksi (TM). Keberhasilan fase ini sangat menentukan umur panjang dan hasil produksi sawit di masa generatif.
+      </p>
+      <div class="note">
+        💡 <strong>Tip:</strong> Pemantauan rutin (observasi vegetatif, kondisi tanah, hama/gulma) dan konsistensi praktik agronomi pada fase ini akan memberikan dampak besar terhadap hasil di masa depan.
+      </div>
+
+      <button class="copy-btn" id="copyBtn">📋 Salin Ringkasan Vegetatif</button>
+    </section>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </div>
+
+  <script>
+    document.getElementById("copyBtn").addEventListener("click", function() {
+      const text = `
+TBM (Tanaman Belum Menghasilkan) merupakan fase awal pertumbuhan kelapa sawit, difokuskan pada pembentukan akar, batang, dan daun yang sehat.
+Tujuan TBM Vegetatif:
+1. Mendorong pertumbuhan akar kuat dan luas.
+2. Meningkatkan pertumbuhan batang dan daun seimbang.
+3. Membangun sistem fisiologis tanaman optimal.
+4. Menjaga kesehatan tanaman dari OPT.
+5. Menyiapkan struktur tanaman untuk pembentukan bunga dan buah.
+Kegiatan utama: pemeliharaan, pemupukan, pengendalian HPT, pengelolaan air, perawatan jalan, dan cover crop.
+Kesimpulan: fase ini menjadi fondasi utama produktivitas sawit di masa TM.
+      `.trim();
+
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById("copyBtn");
+      btn.textContent = "✅ Ringkasan Disalin!";
+      btn.classList.add("copied");
+      setTimeout(() => {
+        btn.textContent = "📋 Salin Ringkasan Vegetatif";
+        btn.classList.remove("copied");
+      }, 2500);
+    });
+  </script>
+</body>
+</html>

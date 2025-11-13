@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Home</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --hover: rgba(255,255,255,0.08);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    /* === HEADER UTAMA DENGAN ACCENT HIJAU === */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1.2rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Garis hijau accent di bagian atas header */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent), #22c55e);
+    }
+
+    /* Efek cahaya lembut hijau */
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      box-shadow: 0 0 18px 2px rgba(22,163,74,0.6);
+    }
+
+    header h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 8px rgba(22,163,74,0.4);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* === DASHBOARD === */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      position: relative;
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: 0.3s;
+      overflow: hidden;
+    }
+
+    /* Garis accent hijau di atas card */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--accent);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: rgba(22,163,74,0.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+    }
+
+    .card:hover::before {
+      height: 6px;
+      background: #22c55e; /* Warna accent lebih terang saat hover */
+    }
+
+    .card .emoji {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card h2 {
+      color: var(--text);
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+    </header>
+
+    <section class="dashboard">
+      <div class="card" onclick="window.location.href='Konsolidasi.html'">
+        <div class="emoji">🌱</div>
+        <h2>Konsolidasi & Penyisipan</h2>
+        <p>Penataan populasi dan penyisipan tanaman untuk keseragaman TBM.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Sensus.html'">
+        <div class="emoji">📋</div>
+        <h2>Sensus</h2>
+        <p>Pendataan tanaman untuk mengetahui kondisi populasi TBM.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Kastrasi.html'">
+        <div class="emoji">✂️</div>
+        <h2>Kastrasi</h2>
+        <p>Pemangkasan bunga jantan untuk mengoptimalkan pertumbuhan vegetatif.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Pemupukan_TBM.html'">
+        <div class="emoji">💧</div>
+        <h2>Pemupukan TBM</h2>
+        <p>Pemberian unsur hara agar pertumbuhan tanaman lebih optimal.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Water_Management.html'">
+        <div class="emoji">💦</div>
+        <h2>Water Management</h2>
+        <p>Pengaturan air untuk menjaga kelembapan dan pertumbuhan akar.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Pengendalian_HP_dan_Gulma.html'">
+        <div class="emoji">🪴</div>
+        <h2>Pengendalian HP & Gulma</h2>
+        <p>Menjaga tanaman dari hama, penyakit, dan gulma pengganggu.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Persiapan_Panen.html'">
+        <div class="emoji">🌾</div>
+        <h2>Persiapan Panen</h2>
+        <p>Kegiatan akhir TBM menuju fase produksi.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Pembuatan_Jalan.html'">
+        <div class="emoji">🛣️</div>
+        <h2>Pembuatan Jalan</h2>
+        <p>Pembuatan akses transportasi di areal kebun.</p>
+      </div>
+
+      <div class="card" onclick="window.location.href='Tujuan_TBM_Vegetatif.html'">
+        <div class="emoji">🌱</div>
+        <h2>Tujuan TBM-Vegetatif</h2>
+        <p>Fondasi utama produktivitas kebun kelapa sawit.</p>
+      </div>
+    </section>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+</body>
+</html>

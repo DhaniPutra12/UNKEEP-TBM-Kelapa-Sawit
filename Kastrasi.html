@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Kastrasi TBM</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --hover: rgba(22,163,74,0.15);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: all 0.25s ease;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      backdrop-filter: blur(6px);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 0 20px rgba(22,163,74,0.3);
+      margin-bottom: 2rem;
+    }
+
+   header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    header button:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(22,163,74,0.6);
+    }
+
+    /* === KONTEN === */
+    .wrap {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      border: 1px solid rgba(22,163,74,0.2);
+      box-shadow: 0 6px 20px rgba(22,163,74,0.25);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transition: 0.3s;
+    }
+
+    .wrap:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(22,163,74,0.5);
+      box-shadow: 0 0 25px rgba(22,163,74,0.4);
+    }
+
+    .wrap h1 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 10px rgba(22,163,74,0.5);
+    }
+
+    .accent-bar {
+      height: 5px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(66,185,127,0.95));
+      box-shadow: 0 0 15px rgba(22,163,74,0.6);
+      margin-bottom: 1.5rem;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 10px rgba(22,163,74,0.4); }
+      50% { box-shadow: 0 0 25px rgba(22,163,74,0.7); }
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,0.25);
+      box-shadow: 0 4px 18px rgba(22,163,74,0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    .card:hover {
+      border-color: rgba(22,163,74,0.5);
+      box-shadow: 0 0 20px rgba(22,163,74,0.5);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .emoji { font-size: 20px; }
+
+    .muted { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    ul.bullets { padding-left: 18px; margin: 8px 0 14px 0; }
+    ul.bullets li { margin: 6px 0; line-height: 1.45; }
+
+    .note {
+      background: rgba(22,163,74,0.08);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    button.copy {
+      margin-top: 22px;
+      background: rgba(22,163,74,0.6);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      box-shadow: 0 0 10px rgba(22,163,74,0.2);
+    }
+
+    button.copy:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    button.copy:active { transform: scale(0.96); }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>Kastrasi pada TBM (Tanaman Belum Menghasilkan)</h1>
+      <div class="accent-bar"></div>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🌴</div><h2>Pengertian</h2></div>
+        <p class="muted">
+          Kastrasi adalah kegiatan pembuangan atau pemotongan seluruh bunga jantan dan betina pada tanaman kelapa sawit yang masih berada dalam fase TBM (Tanaman Belum Menghasilkan).
+        </p>
+        <p class="muted">
+          Tujuannya agar pertumbuhan vegetatif (batang, daun, akar) tanaman dapat berkembang maksimal tanpa energi tanaman terbuang untuk pembentukan bunga atau buah yang belum perlu.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🎯</div><h2>Tujuan Kastrasi TBM</h2></div>
+        <ul class="bullets">
+          <li>Mendorong pertumbuhan vegetatif tanaman (tinggi, diameter batang, dan jumlah pelepah).</li>
+          <li>Mencegah pembentukan buah prematur yang bisa menghambat pertumbuhan tanaman muda.</li>
+          <li>Menghindari serangan hama atau busuk tandan pada buah muda yang belum diinginkan.</li>
+          <li>Menjaga keseragaman pertumbuhan antar tanaman dalam satu blok.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🕐</div><h2>Umur dan Jadwal Kastrasi TBM</h2></div>
+        <p class="muted">
+          Kastrasi dilakukan sejak tanaman mulai berbunga (biasanya umur 12–18 bulan) hingga beberapa bulan sebelum rencana panen pertama.
+        </p>
+        <div class="note">
+          <p><strong>Mari kita pahami penjelasan dari kalimat ini 👇</strong></p>
+          <p>Umur 6/13 sd 24 bl — Sd kapan? Tergantung rencana panen kapan?</p>
+          <p>Artinya: kastrasi dilakukan mulai saat tanaman mulai berbunga (sekitar umur 13 bulan) hingga umur 24 bulan atau lebih, tergantung kapan rencana panen pertama dilakukan.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">📆</div><h2>Contoh Perhitungan Rencana Panen dan Kastrasi</h2></div>
+        <p class="muted"><strong>📍Rencana panen pertama:</strong> umur 36 bulan (3 tahun)</p>
+        <p class="muted">Waktu dari bunga mekar (antesis) sampai buah matang panen = 6 bulan.</p>
+        <p class="muted">Maka, kastrasi harus berhenti 6 bulan sebelum panen agar bunga yang dibiarkan tumbuh saat itu menjadi tandan pertama yang akan dipanen.</p>
+        <div class="note">
+          <p><strong>👉 Jadi:</strong> Jika rencana panen umur 36 bulan, maka kastrasi dihentikan pada umur (36 – 6) = <strong>30 bulan</strong>.</p>
+          <p>Artinya, pada umur 30 bulan kastrasi terakhir dilakukan, setelah itu bunga dibiarkan tumbuh menjadi tandan buah pertama.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🔁</div><h2>Frekuensi Kastrasi</h2></div>
+        <p class="muted"><strong>“18 bl: Rotasi 1 th 3x = 4 bl sekali kastrasi”</strong></p>
+        <p class="muted">Artinya, kastrasi dilakukan setiap 4 bulan sekali, karena dalam satu tahun dilakukan 3 kali rotasi kastrasi.</p>
+        <p class="muted">Mulai umur 18 bulan hingga 30 bulan, berarti ada sekitar 3–4 kali kastrasi dilakukan selama periode TBM akhir.</p>
+      </section>
+
+      <button class="copy" onclick="copyText()">📋 Salin Ringkasan</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function copyText() {
+      const text = `🌴 Kastrasi TBM\n\nKastrasi: Pemotongan bunga jantan & betina untuk fokus pertumbuhan vegetatif.\nWaktu: Umur 12–30 bulan (tergantung rencana panen).\nFrekuensi: 4 bulan sekali.\nBerhenti kastrasi: 6 bulan sebelum panen pertama.`;
+      navigator.clipboard.writeText(text)
+        .then(() => alert('✅ Ringkasan berhasil disalin ke clipboard'))
+        .catch(() => alert('❌ Gagal menyalin teks.'));
+    }
+  </script>
+</body>
+</html>

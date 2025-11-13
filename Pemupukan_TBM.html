@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Pemupukan TBM</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --hover: rgba(22,163,74,0.15);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: all 0.25s ease;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      backdrop-filter: blur(6px);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 0 20px rgba(22,163,74,0.3);
+      margin-bottom: 2rem;
+    }
+
+   header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    header button:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(22,163,74,0.6);
+    }
+
+    /* === KONTEN === */
+    .wrap {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      border: 1px solid rgba(22,163,74,0.2);
+      box-shadow: 0 6px 20px rgba(22,163,74,0.25);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transition: 0.3s;
+    }
+
+    .wrap:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(22,163,74,0.5);
+      box-shadow: 0 0 25px rgba(22,163,74,0.4);
+    }
+
+    .wrap h1 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 10px rgba(22,163,74,0.5);
+    }
+
+    .accent-bar {
+      height: 5px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(66,185,127,0.95));
+      box-shadow: 0 0 15px rgba(22,163,74,0.6);
+      margin-bottom: 1.5rem;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 10px rgba(22,163,74,0.4); }
+      50% { box-shadow: 0 0 25px rgba(22,163,74,0.7); }
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,0.25);
+      box-shadow: 0 4px 18px rgba(22,163,74,0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    .card:hover {
+      border-color: rgba(22,163,74,0.5);
+      box-shadow: 0 0 20px rgba(22,163,74,0.5);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .emoji { font-size: 20px; }
+
+    .muted { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    ul.bullets { padding-left: 18px; margin: 8px 0 14px 0; }
+    ul.bullets li { margin: 6px 0; line-height: 1.45; }
+
+    .note {
+      background: rgba(22,163,74,0.08);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    button.copy {
+      margin-top: 22px;
+      background: rgba(22,163,74,0.6);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      box-shadow: 0 0 10px rgba(22,163,74,0.2);
+    }
+
+    button.copy:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    button.copy:active { transform: scale(0.96); }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>Pemupukan pada TBM (Tanaman Belum Menghasilkan)</h1>
+      <div class="accent-bar"></div>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🌴</div><h2>Pengertian Pemupukan pada TBM</h2></div>
+        <p class="muted">
+          Pemupukan TBM adalah kegiatan pemberian unsur hara ke tanaman kelapa sawit muda (umur 0–3 tahun) untuk menunjang pertumbuhan vegetatif seperti tinggi batang, jumlah pelepah, dan perkembangan akar.
+        </p>
+        <p class="muted">
+          Tujuannya agar tanaman dapat tumbuh sehat dan siap memasuki fase produktif (Tanaman Menghasilkan/TM) dengan kondisi optimal.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🎯</div><h2>Tujuan Pemupukan TBM</h2></div>
+        <ul class="bullets">
+          <li>Meningkatkan pertumbuhan vegetatif tanaman muda.</li>
+          <li>Menyediakan unsur hara makro dan mikro sesuai kebutuhan tanaman.</li>
+          <li>Menjaga kesuburan tanah.</li>
+          <li>Meningkatkan daya tahan tanaman terhadap penyakit dan cekaman lingkungan.</li>
+          <li>Mempersiapkan tanaman agar cepat berbuah optimal saat memasuki fase TM.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🕐</div><h2>Jenis-Jenis Pupuk yang Digunakan</h2></div>
+        <p class="muted">a. Pupuk Makro:</p>
+        <ul class="bullets">
+          <li>Nitrogen (N) → Merangsang pertumbuhan daun dan batang.</li>
+          <li>Fosfor (P) → Mendorong pertumbuhan akar dan pembentukan bunga awal.</li>
+          <li>Kalium (K) → Mengatur keseimbangan air dan memperkuat batang.</li>
+          <li>Magnesium (Mg) → Membentuk klorofil dan menjaga kehijauan daun.</li>
+          <li>Kalsium (Ca) → Menguatkan jaringan tanaman dan memperbaiki struktur tanah.</li>
+        </ul>
+        <p class="muted">b. Pupuk Mikro:</p>
+        <p class="muted">Boron (B), Zink (Zn), Tembaga (Cu) → Dibutuhkan dalam jumlah kecil untuk mendukung metabolisme tanaman.</p>
+        <p class="muted">c. Pupuk Organik:</p>
+        <p class="muted">Kompos atau pupuk kandang digunakan untuk memperbaiki struktur tanah dan meningkatkan aktivitas mikroorganisme tanah.</p>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">📆</div><h2>Dosis dan Frekuensi Pemupukan</h2></div>
+        <p class="muted">1. Dosis pupuk disesuaikan dengan umur tanaman, kondisi tanah, dan hasil analisis daun.</p>
+        <p class="muted">2. Umumnya dilakukan 2–3 kali setahun (awal musim hujan dan pertengahan musim hujan).</p>
+        <p class="muted">3. Contoh umum untuk TBM tahun pertama (per pohon per tahun):</p>
+        <ul class="bullets">
+          <li>Urea : ± 0,5–0,75 kg</li>
+          <li>RP/TSP : ± 0,25 kg</li>
+          <li>KCl : ± 0,5 kg</li>
+          <li>Kieserite : ± 0,25 kg</li>
+        </ul>
+        <div class="note">
+          <p class="muted">⚠️ Catatan: Angka di atas hanya contoh umum — dosis sebenarnya harus mengikuti hasil analisis tanah dan rekomendasi agronom.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🔁</div><h2>Cara Aplikasi Pemupukan</h2></div>
+        <p class="muted">Aplikasi pemupukan pada tanaman kelapa sawit TBM dilakukan dengan tujuan untuk menyediakan unsur hara yang dibutuhkan tanaman agar pertumbuhannya optimal. Pemupukan harus dilakukan dengan cara, waktu, dan dosis yang tepat agar hasilnya efektif dan efisien.</p>
+        <p class="muted">Pupuk diberikan di piringan (circle) sekitar batang dengan jarak ± 30–50 cm dari pangkal tanaman. Dilakukan pada tanah yang bersih dari gulma. Hindari pemupukan saat hujan deras agar pupuk tidak hanyut. Setelah pemupukan, tanah di sekitar piringan bisa digemburkan ringan agar pupuk cepat larut.</p>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🕐</div><h2>Faktor yang Mempengaruhi Efektivitas Pemupukan</h2></div>
+        <p class="muted">1. Jenis dan kesuburan tanah</p>
+        <p class="muted">Jenis tanah sangat berpengaruh terhadap kemampuan tanah dalam menyimpan dan menyediakan unsur hara bagi tanaman. Tanah yang subur dengan struktur gembur dan kandungan bahan organik tinggi akan membantu pupuk lebih mudah diserap akar. Sebaliknya, tanah yang miskin hara atau terlalu asam memerlukan perlakuan khusus seperti pengapuran dan penambahan bahan organik sebelum pemupukan.</p>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">📆</div><h2>Pemeliharaan Setelah Pemupukan</h2></div>
+        <p class="muted">1. Lakukan pengamatan daun dan pertumbuhan secara berkala.</p>
+        <p class="muted">2. Lakukan analisis daun dan tanah setiap tahun untuk menyesuaikan dosis pupuk.</p>
+        <p class="muted">3. Jaga agar circle tetap bersih dari gulma agar penyerapan pupuk maksimal.</p>
+        <div class="note">
+          <p class="muted">🌿 Kesimpulan: Pemupukan TBM merupakan langkah penting untuk menjamin pertumbuhan optimal tanaman kelapa sawit muda. Kegiatan ini harus dilakukan dengan dosis, jenis pupuk, dan cara aplikasi yang tepat agar tanaman siap memasuki fase menghasilkan dengan kondisi sehat dan produktif.</p>
+        </div>
+      </section>
+
+      <button class="copy" onclick="copyText()">📋 Salin Ringkasan</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function copyText() {
+      const text = '🌴 Pemupukan TBM\n\nTujuan: Meningkatkan pertumbuhan vegetatif tanaman, Menyediakan unsur hara makro dan mikro, Menjaga kesuburan tanah, Meningkatkan ketahanan tanaman dan Mempersiapkan tanaman menuju fase TM yang optimal.\nJenis Pupuk: Makro (N, P, K, Mg, Ca), Mikro (B, Zn, Cu), Organik (Kompos atau pupuk kandang untuk memperbaiki struktur tanah).\nCara Aplikasi: Pupuk disebar merata di piringan sekitar batang (jarak 30–50 cm), pada tanah bersih dan lembap. Hindari pemupukan saat hujan deras agar pupuk tidak hanyut.\nFaktor Efektivitas: Jenis & kesuburan tanah, Curah hujan & kelembapan, Umur tanaman, Kualitas pupukWaktu & teknik aplikasi.\nPemeliharaan: Lakukan pengamatan pertumbuhan, analisis daun dan tanah setiap tahun, serta jaga piringan tetap bersih dari gulma.\nKesimpulan: Pemupukan TBM sangat penting untuk pertumbuhan optimal dan produktivitas tinggi. Pelaksanaannya harus tepat jenis, dosis, waktu, dan cara agar tanaman tumbuh sehat serta siap berbuah maksimal.';
+      navigator.clipboard.writeText(text)
+        .then(() => alert('✅ Ringkasan berhasil disalin ke clipboard'))
+        .catch(() => alert('❌ Gagal menyalin teks.'));
+    }
+  </script>
+</body>
+</html>

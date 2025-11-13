@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Pembuatan Jalan</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --hover: rgba(22,163,74,0.15);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: all 0.25s ease;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      backdrop-filter: blur(6px);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 0 20px rgba(22,163,74,0.3);
+      margin-bottom: 2rem;
+    }
+
+   header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    header button:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(22,163,74,0.6);
+    }
+
+    /* === KONTEN === */
+    .wrap {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      border: 1px solid rgba(22,163,74,0.2);
+      box-shadow: 0 6px 20px rgba(22,163,74,0.25);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transition: 0.3s;
+    }
+
+    .wrap:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(22,163,74,0.5);
+      box-shadow: 0 0 25px rgba(22,163,74,0.4);
+    }
+
+    .wrap h1 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 10px rgba(22,163,74,0.5);
+    }
+
+    .accent-bar {
+      height: 5px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(66,185,127,0.95));
+      box-shadow: 0 0 15px rgba(22,163,74,0.6);
+      margin-bottom: 1.5rem;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 10px rgba(22,163,74,0.4); }
+      50% { box-shadow: 0 0 25px rgba(22,163,74,0.7); }
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,0.25);
+      box-shadow: 0 4px 18px rgba(22,163,74,0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    .card:hover {
+      border-color: rgba(22,163,74,0.5);
+      box-shadow: 0 0 20px rgba(22,163,74,0.5);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .emoji { font-size: 20px; }
+
+    .muted { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    ul.bullets { padding-left: 18px; margin: 8px 0 14px 0; }
+    ul.bullets li { margin: 6px 0; line-height: 1.45; }
+
+    .note {
+      background: rgba(22,163,74,0.08);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    button.copy {
+      margin-top: 22px;
+      background: rgba(22,163,74,0.6);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      box-shadow: 0 0 10px rgba(22,163,74,0.2);
+    }
+
+    button.copy:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    button.copy:active { transform: scale(0.96); }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>Pembuatan Jalan TBM (Tanaman Belum Menghasilkan)</h1>
+      <div class="accent-bar"></div>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🌴</div><h2>Pengertian</h2></div>
+          Pembuatan jalan TBM adalah kegiatan membuka dan membentuk jaringan jalan di areal tanaman kelapa sawit muda (umur 0–3 tahun) untuk mendukung kegiatan pemeliharaan, pengangkutan pupuk, bahan tanam, dan sarana produksi lainnya.
+          Jalan ini berfungsi sebagai akses utama operasional kebun, sehingga harus direncanakan dan dibangun dengan baik sejak awal penanaman.
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🎯</div><h2>Tujuan Pembuatan Jalan TBM</h2></div>
+        <ul class="bullets">
+          <li>Mempermudah mobilisasi tenaga kerja, alat, dan bahan ke seluruh areal kebun.</li>
+          <li>Mempercepat kegiatan pemeliharaan seperti pemupukan, penyemprotan, dan pengendalian gulma.</li>
+          <li>Menjadi jalur transportasi hasil kebun saat memasuki fase produksi (TM).</li>
+          <li>Mendukung sistem drainase kebun agar air mengalir lancar.</li>
+          <li>Menunjang efisiensi dan keselamatan dalam operasional kebun.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class=emoji>🗺️</div><h2>Jenis-Jenis Jalan di Areal TBM</h2></div>
+            1. Jalan Utama (Main Road)
+            <ul class="bullets">
+                <li>Jalan penghubung antar blok atau antar afdeling.</li>
+                <li>Lebar ± 6–8 meter, permukaan diperkeras dengan laterit atau batu.</li>
+            </ul>
+            2. Jalan Sekunder / Kolektor
+            <ul class="bullets">
+                <li>Jalan penghubung antara jalan utama dengan blok tanaman.</li>
+                <li>Lebar ± 4–6 meter.</li>
+            </ul>
+            3. Jalan Panen / Transport (Collection Road)
+            <ul class="bullets">
+                <li>Jalan di dalam blok yang digunakan untuk pengangkutan hasil.</li>
+                <li>Lebar ± 3–4 meter.</li>
+            </ul>
+            4. Jalan Gawangan (Path)
+            <ul class="bullets">
+                <li>Jalur kecil di antara barisan tanaman untuk aktivitas perawatan.</li>
+                <li>Lebar ± 1,5–2 meter.</li>
+            </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🕐</div><h2>Tahapan Pembuatan Jalan</h2></div>
+         1. Perencanaan dan Pemetaan
+         <ul class="bullets">
+            <li>Menentukan jalur jalan sesuai kontur lahan dan tata letak blok.</li>
+            <li>Menghindari area dengan kemiringan ekstrem untuk mencegah erosi.</li>
+         </ul>
+         2. Pembersihan dan Penebangan (Land Clearing)
+         <ul class="bullets">
+            <li>Membersihkan jalur jalan dari semak, tunggul, dan batu.</li>
+         </ul>
+         3. Perataan dan Pemadatan Tanah
+         <ul class="bullets">
+            <li>Permukaan tanah diratakan, kemudian dipadatkan menggunakan alat berat seperti grader atau compactor.</li>
+         </ul>
+         4. Pembuatan Parit dan Drainase
+         <ul class="bullets">
+            <li>Dibuat di sisi kiri-kanan jalan untuk mengalirkan air hujan dan mencegah genangan.</li>
+         </ul>
+         5. Pengerasan Jalan
+         <ul class="bullets">
+            <li>Menggunakan bahan seperti laterit, batu padas, atau sirtu (pasir-batu).</li>
+            <li>Tebal lapisan ± 15–20 cm tergantung kondisi tanah.</li>
+         </ul>
+         6. Pembuatan Jembatan Kecil atau Gorong-Gorong
+         <ul class="bullets">
+            <li>Diperlukan pada area yang dilalui aliran air untuk menjaga kelancaran drainase.</li>
+         </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">⚙️</div><h2>Faktor yang Perlu Diperhatikan</h2></div>
+        <ul class="bullets">
+            <li>Kondisi topografi: Hindari jalur terlalu curam.</li>
+            <li>Sistem drainase: Pastikan aliran air tidak menggerus badan jalan.</li>
+            <li>Bahan pengeras: Gunakan material lokal yang kuat dan ekonomis.</li>
+            <li>Pemeliharaan rutin: Perbaiki jalan berlubang dan bersihkan parit secara berkala.</li>
+        </ul>
+      </section>
+      <div class="note">
+          <p><strong>Kesimpulan 👇</strong></p>
+          <p>Pembuatan jalan TBM merupakan tahap penting dalam pengelolaan kebun kelapa sawit.</p>
+          <p>Jalan yang dirancang dan dibangun dengan baik akan meningkatkan efisiensi transportasi, memperlancar kegiatan pemeliharaan, serta mendukung produktivitas saat tanaman memasuki fase menghasilkan (TM).</p>
+        </div>
+
+      <button class="copy" onclick="copyText()">📋 Salin Ringkasan</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function copyText() {
+      const text = `🛣️ Pembuatan Jalan TBM\n\nPembuatan jalan TBM bertujuan untuk mempermudah akses kegiatan pemeliharaan dan transportasi di areal kelapa sawit muda. Jalan yang dirancang dengan baik akan memperlancar mobilisasi tenaga kerja, alat, dan bahan, serta mendukung sistem drainase kebun. Dengan pembangunan dan pemeliharaan jalan yang tepat, efisiensi kerja meningkat dan kebun siap menghadapi fase produksi secara optimal.`;
+      navigator.clipboard.writeText(text)
+        .then(() => alert('✅ Ringkasan berhasil disalin ke clipboard'))
+        .catch(() => alert('❌ Gagal menyalin teks.'));
+    }
+  </script>
+</body>
+</html>

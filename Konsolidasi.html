@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Konsolidasi & Penyisipan</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --hover: rgba(255,255,255,0.08);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      backdrop-filter: blur(6px);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 25px rgba(22,163,74,0.25);
+      margin-bottom: 2rem;
+      border: 1px solid rgba(22,163,74,0.25);
+    }
+
+    header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    header button:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+      box-shadow: 0 0 16px rgba(34,197,94,0.6);
+    }
+
+    /* === KONTEN === */
+    .wrap {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 25px rgba(22,163,74,0.15);
+      border: 1px solid rgba(22,163,74,0.15);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transition: 0.3s;
+    }
+
+    .wrap:hover {
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 25px rgba(22,163,74,0.25);
+    }
+
+    .wrap h1 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 10px rgba(22,163,74,0.5);
+    }
+
+    .accent-bar {
+      height: 5px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(66,185,127,0.95));
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 15px rgba(22,163,74,0.4);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(22,163,74,0.35);
+      box-shadow: 0 0 18px rgba(22,163,74,0.25);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .emoji { font-size: 20px; }
+
+    .muted { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+    ul.bullets { padding-left: 18px; margin: 8px 0 14px 0; }
+    ul.bullets li { margin: 6px 0; line-height: 1.45; }
+
+    .note {
+      background: rgba(22,163,74,0.07);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    button.copy {
+      margin-top: 22px;
+      background: rgba(22,163,74,0.6);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      box-shadow: 0 0 10px rgba(22,163,74,0.2);
+    }
+
+    button.copy:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>Konsolidasi & Penyisipan TBM</h1>
+      <div class="accent-bar"></div>
+
+      <div class="grid">
+        <section class="card">
+          <div class="section-title">
+            <div class="emoji">🌱</div><h2>Konsolidasi TBM</h2>
+          </div>
+          <p class="muted">
+            Konsolidasi adalah penataan kembali areal tanam TBM untuk menyeragamkan populasi tanaman antar blok (standar ±143 tanaman/ha untuk jarak 9×9 m segitiga).
+          </p>
+          <ul class="bullets">
+            <li>Menyeragamkan populasi antar blok.</li>
+            <li>Meningkatkan efisiensi lahan.</li>
+            <li>Menjaga keseragaman pertumbuhan tanaman.</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <div class="emoji">🌿</div><h2>Penyisipan TBM</h2>
+          </div>
+          <p class="muted">
+            Penyisipan mengganti tanaman mati atau abnormal agar populasi tetap optimal dan pertumbuhan seragam.
+          </p>
+          <ul class="bullets">
+            <li>Menjaga populasi tanaman optimal.</li>
+            <li>Menjamin keseragaman umur dan pertumbuhan.</li>
+            <li>Meningkatkan potensi produksi.</li>
+          </ul>
+          <div class="note">
+            Dilakukan hingga umur tanaman <strong>12–18 bulan</strong> berdasarkan data sensus.
+          </div>
+        </section>
+      </div>
+
+      <button class="copy" onclick="copyText()">📋 Salin Ringkasan</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function copyText(){
+      const text = `🌱 Konsolidasi & Penyisipan TBM\n\nKonsolidasi: Penataan populasi TBM agar seragam.\nPenyisipan: Mengganti tanaman mati agar populasi optimal.\nWaktu: 12–18 bulan.`;
+      navigator.clipboard.writeText(text)
+        .then(() => alert('✅ Ringkasan berhasil disalin ke clipboard'))
+        .catch(() => alert('❌ Gagal menyalin.'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Water Management</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #0b1220;
+      --muted: #f5f6f9;
+      --accent: #16a34a;
+      --glass: rgba(255,255,255,0.03);
+      --surface: #0b1220;
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.25s ease; }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(180deg, #071229 0%, #071a2a 60%);
+      color: #e6eef6;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0b1220;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      margin-bottom: 2rem;
+    }
+
+    header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #a0aec0;
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    header button:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+    }
+
+    /* === CARD CONTENT === */
+    .wrap {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+      padding: 28px;
+      max-width: 920px;
+      margin: 0 auto;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .wrap h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--surface));
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .emoji { font-size: 20px; }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    ul.bullets {
+      padding-left: 18px;
+      margin: 8px 0 14px 0;
+    }
+
+    ul.bullets li {
+      margin: 8px 0;
+      line-height: 1.45;
+    }
+
+    .note {
+      background: var(--glass);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .accent-bar {
+      height: 6px;
+      border-radius: 6px;
+      margin-top: 12px;
+      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(66,185,127,0.95));
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+   button.copy {
+      margin-top: 22px;
+      background: rgba(22,163,74,0.6);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      box-shadow: 0 0 10px rgba(22,163,74,0.2);
+    }
+
+    button.copy:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    button.copy:active {
+      transform: scale(0.96);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>Water Management pada TBM Sawit</h1>
+      <div class="accent-bar"></div>
+
+      <section class="card">
+        <p class="muted">
+          <strong>Water management (pengelolaan air)</strong> pada TBM sawit adalah kegiatan mengatur, mengendalikan, dan memanfaatkan air di areal tanaman kelapa sawit muda agar ketersediaan air di tanah tetap optimal — tidak berlebihan (genangan) dan tidak kekurangan (kekeringan). Tujuannya menjaga pertumbuhan vegetatif tanaman secara maksimal, karena pada fase ini akar sawit sedang berkembang pesat dan sangat sensitif terhadap kondisi air di sekitar perakaran.
+        </p>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <div class="section-title">
+            <div class="emoji">🌱</div><h2>Tujuan & Contoh Kegiatan Water Management TBM</h2>
+          </div>
+
+          <h3 class="small">🔹 Tujuan</h3>
+          <ul class="bullets">
+            <li>Menjaga kelembapan tanah ideal untuk pertumbuhan akar.</li>
+            <li>Mencegah genangan air yang dapat menyebabkan akar busuk.</li>
+            <li>Mengantisipasi kekeringan saat musim kemarau.</li>
+            <li>Menjamin keseragaman pertumbuhan tanaman di seluruh areal.</li>
+            <li>Mendukung efektivitas pemupukan karena air membantu penyerapan hara.</li>
+          </ul>
+
+          <h3 class="small">🔹 Contoh Kegiatan</h3>
+          <ul class="bullets">
+            <li>Pembuatan dan pemeliharaan parit drainase.</li>
+            <li>Pembuatan tanggul dan dam blok.</li>
+            <li>Pemasangan pintu air.</li>
+            <li>Pembuatan rorak atau lubang resapan air.</li>
+            <li>Pemeliharaan jaringan saluran air.</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <div class="emoji">🌿</div><h2>Prinsip Utama Water Management TBM</h2>
+          </div>
+          <ul class="bullets">
+            <li>Air harus tersedia sepanjang tahun, terutama di lapisan 0–60 cm tempat akar aktif.</li>
+            <li>Drainase dan irigasi harus seimbang sesuai kondisi lahan (rata, miring, atau rawa).</li>
+            <li>Tinggi muka air tanah ideal untuk TBM sekitar 60–80 cm dari permukaan tanah.</li>
+            <li>Pemantauan rutin penting untuk mencegah kekeringan atau kelebihan air.</li>
+          </ul>
+          <div class="note">
+            Pengelolaan air yang baik pada TBM akan memengaruhi produktivitas tanaman saat memasuki masa menghasilkan (TM).
+          </div>
+        </section>
+      </div>
+
+      <button class="copy" onclick="copyText()">📋 Salin Ringkasan</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function copyText(){
+      const text = `💧 Water Management TBM Sawit\n\nTujuan: Menjaga kelembapan tanah, mencegah genangan & kekeringan, serta mendukung pertumbuhan seragam.\nContoh kegiatan: Parit, tanggul, dam blok, pintu air, rorak.\nPrinsip utama: Air tersedia sepanjang tahun, drainase & irigasi seimbang, tinggi muka air 60–80 cm.`;
+      navigator.clipboard.writeText(text)
+        .then(() => alert('✅ Ringkasan berhasil disalin ke clipboard'))
+        .catch(() => alert('❌ Gagal menyalin. Silakan salin manual.'));
+    }
+  </script>
+</body>
+</html>

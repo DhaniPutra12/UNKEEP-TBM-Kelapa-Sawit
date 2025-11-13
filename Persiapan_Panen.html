@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Persiapan Panen</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --hover: rgba(22,163,74,0.15);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: all 0.25s ease;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 16, 33, 0.8);
+      border: 1px solid rgba(22,163,74,0.3);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 0 25px rgba(22,163,74,0.2);
+      margin-bottom: 2rem;
+    }
+
+    header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    header button:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.5);
+    }
+
+    /* Wrapper utama */
+    .wrap {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transition: 0.3s;
+      border: 1px solid rgba(22,163,74,0.15);
+      animation: fadeIn 0.8s ease;
+    }
+
+    .wrap:hover { background: rgba(255,255,255,0.05); }
+
+    .wrap h1 {
+      font-size: 1.7rem;
+      color: var(--accent);
+      text-shadow: 0 0 8px rgba(22,163,74,0.5);
+      margin-bottom: 0.8rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Accent bar hijau */
+    .accent-bar {
+      height: 5px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(66,185,127,0.95));
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 16px rgba(22,163,74,0.5);
+    }
+
+    /* Card section */
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,0.2);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .emoji { font-size: 20px; }
+
+    .muted { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+    ul.bullets { padding-left: 18px; margin: 8px 0 14px 0; }
+    ul.bullets li { margin: 6px 0; line-height: 1.45; }
+
+    .note {
+      background: rgba(22,163,74,0.08);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+
+    /* Tombol salin */
+    button.copy {
+      margin-top: 22px;
+      background: rgba(22,163,74,0.6);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      box-shadow: 0 0 10px rgba(22,163,74,0.2);
+    }
+
+    button.copy:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    button.copy:active {
+      transform: scale(0.97);
+      background: rgba(22,163,74,0.25);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>🌴 Persiapan Panen TBM Kelapa Sawit</h1>
+      <div class="accent-bar"></div>
+
+      <!-- Semua materi utuh -->
+      <section class="card">
+        <div class="section-title"><div class="emoji">📘</div><h2>Pengertian Persiapan Panen TBM</h2></div>
+        <p class="muted">Persiapan panen TBM adalah serangkaian kegiatan yang dilakukan menjelang masa tanaman kelapa sawit mulai menghasilkan (memasuki fase TM). Tujuannya untuk memastikan semua sarana, prasarana, dan kondisi kebun siap digunakan dalam kegiatan panen sehingga produksi TBS dapat dilakukan secara efisien, cepat, dan berkualitas.</p>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🎯</div><h2>Tujuan Persiapan Panen</h2></div>
+        <ul class="bullets">
+          <li>Menjamin kegiatan panen berjalan lancar dan efisien.</li>
+          <li>Menghasilkan TBS berkualitas tinggi sesuai standar pabrik.</li>
+          <li>Menekan kerugian hasil panen akibat buah tertinggal atau rusak.</li>
+          <li>Menyiapkan infrastruktur, tenaga kerja, dan sistem kerja yang siap digunakan saat panen pertama dimulai.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">🛠️</div><h2>Kegiatan Persiapan Panen TBM</h2></div>
+        <p class="muted"><strong>a. Identifikasi Areal Siap Panen</strong></p>
+        <ul class="bullets">
+          <li>Menentukan blok-blok TBM yang sudah memasuki masa menghasilkan (umur ±30–36 bulan).</li>
+          <li>Melakukan pengamatan bunga dan buah untuk menentukan waktu panen pertama.</li>
+        </ul>
+        <p class="muted"><strong>b. Pembuatan dan Perbaikan Infrastruktur Panen</strong></p>
+        <ul class="bullets">
+          <li>Jalan panen diperkeras agar kendaraan dan pekerja dapat lewat dengan mudah.</li>
+          <li>TPH disiapkan di lokasi strategis (setiap 5–10 pokok).</li>
+          <li>Jembatan dan gorong-gorong diperbaiki agar transportasi buah lancar ke jalan utama.</li>
+        </ul>
+        <p class="muted"><strong>c. Persiapan Alat Panen</strong></p>
+        <ul class="bullets">
+          <li>Menyediakan alat panen seperti egrek, dodos, angkong, dan keranjang.</li>
+          <li>Melatih tenaga kerja agar mampu menggunakan alat dengan benar.</li>
+        </ul>
+        <p class="muted"><strong>d. Pembersihan Area Panen (CPT)</strong></p>
+        <ul class="bullets">
+          <li>Membersihkan Circle, Path, dan TPH agar memudahkan pemanen.</li>
+          <li>Mengendalikan gulma dan merapikan jalur pengangkutan buah.</li>
+        </ul>
+        <p class="muted"><strong>e. Pelatihan dan Penyiapan Tenaga Kerja</strong></p>
+        <ul class="bullets">
+          <li>Memberikan pelatihan kepada calon pemanen tentang ciri buah matang panen, teknik pemotongan tandan, dan prosedur pengangkutan TBS.</li>
+          <li>Menetapkan sistem kerja dan target panen sesuai kapasitas blok.</li>
+        </ul>
+        <p class="muted"><strong>f. Penyiapan Transportasi</strong></p>
+        <ul class="bullets">
+          <li>Menyiapkan alat angkut seperti truk, lori, atau trailer.</li>
+          <li>Memastikan jalur dari TPH ke pabrik sawit dapat dilalui dengan aman.</li>
+        </ul>
+        <p class="muted"><strong>g. Pembuatan Rambu dan Penandaan Blok</strong></p>
+        <ul class="bullets">
+          <li>Memasang papan blok, nomor baris, dan tanda arah panen untuk memudahkan koordinasi.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">📆</div><h2>Aspek Teknis yang Diperhatikan</h2></div>
+        <ul class="bullets">
+          <li>Umur tanaman: siap panen pada umur 30–36 bulan setelah tanam.</li>
+          <li>Kondisi buah: buah matang fisiologis dengan 5–10 brondolan jatuh alami per tandan.</li>
+          <li>Kerapatan tanaman: pastikan jarak antar pohon dan jalan panen sudah ideal (biasanya 9×9 m).</li>
+          <li>Drainase: sistem parit harus berfungsi baik agar tidak ada genangan.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">💡</div><h2>Manfaat Persiapan Panen yang Baik</h2></div>
+        <ul class="bullets">
+          <li>Panen perdana berjalan efisien dan tepat waktu.</li>
+          <li>Mengurangi kehilangan hasil dan kerusakan buah.</li>
+          <li>Mempermudah pengawasan kegiatan panen.</li>
+          <li>Meningkatkan produktivitas dan kualitas TBS.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">✅</div><h2>Kesimpulan</h2></div>
+        <p class="muted">Persiapan panen TBM adalah tahap penting sebelum memasuki masa produksi. Kegiatan ini meliputi penataan infrastruktur, pembersihan area, pelatihan tenaga kerja, dan penyediaan alat panen. Dengan persiapan yang baik, kegiatan panen perdana dapat berjalan lancar dan menghasilkan TBS berkualitas tinggi.</p>
+      </section>
+
+      <button class="copy" onclick="copyText()">📋 Salin Ringkasan</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function copyText(){
+      const text = `🌴 Persiapan Panen TBM\n\nKegiatan: Identifikasi areal siap panen, perbaikan jalan, penyediaan alat, pembersihan CPT, pelatihan tenaga kerja, dan penyiapan transportasi.\nTujuan: Panen perdana berjalan efisien dan menghasilkan TBS berkualitas.`;
+      navigator.clipboard.writeText(text)
+        .then(() => alert('✅ Ringkasan berhasil disalin ke clipboard'))
+        .catch(() => alert('❌ Gagal menyalin.'));
+    }
+  </script>
+</body>
+</html>

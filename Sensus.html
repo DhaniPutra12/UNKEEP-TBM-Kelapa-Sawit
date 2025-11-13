@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Sensus TBM Sawit</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --hover: rgba(22,163,74,0.15);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.25s ease; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      overflow-y: auto;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 4px 20px rgba(22,163,74,0.3);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(22,163,74,0.4);
+    }
+
+    header button:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.6);
+    }
+
+    /* === KONTEN === */
+    .wrap {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      border: 1px solid rgba(22,163,74,0.2);
+      padding: 2rem;
+      transition: 0.3s;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .wrap:hover { background: rgba(255,255,255,0.05); border-color: rgba(22,163,74,0.4); }
+
+    .wrap h1 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 10px rgba(22,163,74,0.4);
+    }
+
+    .accent-bar {
+      height: 5px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(66,185,127,0.95));
+      box-shadow: 0 0 15px rgba(22,163,74,0.6);
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,0.2);
+      box-shadow: 0 4px 18px rgba(22,163,74,0.25);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Accent hijau di atas setiap card */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #22c55e);
+      box-shadow: 0 0 10px rgba(22,163,74,0.6);
+    }
+
+    .card:hover {
+      border-color: rgba(22,163,74,0.5);
+      box-shadow: 0 0 20px rgba(22,163,74,0.4);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .emoji { font-size: 20px; }
+
+    .muted { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+    ul.bullets { padding-left: 18px; margin: 8px 0 14px 0; }
+    ul.bullets li { margin: 6px 0; line-height: 1.45; }
+
+    .note {
+      background: rgba(22,163,74,0.08);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Tombol salin */
+    .copy-btn {
+      display: inline-block;
+      background: rgba(22,163,74,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      box-shadow: 0 0 10px rgba(22,163,74,0.4);
+      transition: 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: #22c55e;
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(22,163,74,0.6);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>Sensus Pada TBM Sawit</h1>
+      <div class="accent-bar"></div>
+
+      <section class="card">
+        <p class="muted">
+          Sensus pada TBM (Tanaman Belum Menghasilkan) sawit adalah kegiatan pendataan seluruh tanaman sawit muda (umur 0–3 tahun) untuk mengetahui jumlah tanaman hidup, mati, abnormal, serta kondisinya di lapangan.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><div class="emoji">📊</div><h2>Istilah dalam Sensus TBM Sawit</h2></div>
+
+        <h3 class="muted">1. 🌱 Pokok Produktif</h3>
+        <ul class="bullets">
+          <li>Batang tegak dan lurus.</li>
+          <li>Daun hijau segar, jumlah pelepah sesuai umur.</li>
+          <li>Pertumbuhan tinggi dan diameter batang normal.</li>
+        </ul>
+
+        <h3 class="muted">2. 🪴 Pokok Non Produktif</h3>
+        <ul class="bullets">
+          <li>Batang kecil atau bengkok.</li>
+          <li>Daun pucat atau rusak.</li>
+          <li>Pertumbuhan lambat.</li>
+        </ul>
+
+        <h3 class="muted">3. 🌿 Pokok Abnormal</h3>
+        <ul class="bullets">
+          <li>Batang ganda (double stem).</li>
+          <li>Tumbuh miring ekstrem.</li>
+          <li>Daun sempit atau cacat.</li>
+        </ul>
+
+        <p class="note">Pokok abnormal biasanya dicatat terpisah dan direkomendasikan untuk disulam (diganti).</p>
+
+        <h3 class="muted">4. 🌾 Pengukuran Panjang Pelepah</h3>
+        <ul class="bullets">
+          <li>Menilai keseragaman pertumbuhan antar tanaman.</li>
+          <li>Indikator status pemupukan.</li>
+          <li>Data pendukung evaluasi sensus TBM.</li>
+        </ul>
+      </section>
+
+      <!-- Tombol salin ringkasan -->
+      <button class="copy-btn" onclick="salinRingkasan()">📋 Salin Ringkasan Sensus TBM</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function salinRingkasan() {
+      const text = `📋 Ringkasan Sensus TBM Sawit:
+- Sensus dilakukan pada tanaman umur 0–3 tahun untuk mengetahui jumlah pokok hidup, mati, dan abnormal.
+- Pokok produktif: batang tegak, daun hijau, pertumbuhan normal.
+- Pokok non produktif: batang kecil/bengkok, daun rusak, pertumbuhan lambat.
+- Pokok abnormal: batang ganda, tumbuh miring, daun cacat — perlu disulam.
+- Pengukuran panjang pelepah membantu menilai keseragaman dan status pemupukan.`;
+      navigator.clipboard.writeText(text);
+      alert("✅ Ringkasan sensus TBM berhasil disalin!");
+    }
+  </script>
+</body>
+</html>

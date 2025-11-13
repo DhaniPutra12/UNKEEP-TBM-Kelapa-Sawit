@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upkeep TBM - Hama, Penyakit & Gulma</title>
+  <style>
+    :root {
+      --bg: #0a1120;
+      --card: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa5b1;
+      --accent: #16a34a;
+      --accent-light: #22c55e;
+      --hover: rgba(22,163,74,0.15);
+      --radius: 14px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.25s ease; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #071229, #0b1220 70%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      backdrop-filter: blur(6px);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 0 20px rgba(22,163,74,0.25);
+      margin-bottom: 2rem;
+    }
+
+    header h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(22,163,74,0.4);
+    }
+
+    header button:hover {
+      background: var(--accent-light);
+      transform: scale(1.05);
+      box-shadow: 0 0 14px rgba(34,197,94,0.5);
+    }
+
+    /* === KONTEN === */
+    .wrap {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      box-shadow: 0 0 25px rgba(22,163,74,0.15);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .wrap h1 {
+      font-size: 1.6rem;
+      color: var(--accent-light);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 10px rgba(22,163,74,0.3);
+    }
+
+    .accent-bar {
+      height: 6px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(22,163,74,1), rgba(66,185,127,1));
+      box-shadow: 0 0 16px rgba(22,163,74,0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--bg));
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,0.15);
+      box-shadow: 0 4px 20px rgba(22,163,74,0.15);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(22,163,74,0.9), rgba(66,185,127,0.8));
+      border-radius: 6px 6px 0 0;
+    }
+
+    .card h3 {
+      color: var(--accent-light);
+      margin-bottom: 0.6rem;
+    }
+
+    .muted { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+    ul.bullets { padding-left: 20px; margin: 8px 0 14px 0; }
+    ul.bullets li { margin: 6px 0; line-height: 1.45; }
+
+    .note {
+      background: rgba(22,163,74,0.1);
+      border-left: 3px solid var(--accent);
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    button.copy {
+      margin-top: 22px;
+      background: rgba(22,163,74,0.6);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      box-shadow: 0 0 10px rgba(22,163,74,0.2);
+    }
+
+    button.copy:hover {
+      color: #e6eef6;
+      background: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(22,163,74,0.35);
+    }
+
+    button.copy:active { 
+      transform: scale(0.97); 
+      background: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-content">
+    <header>
+      <div>
+        <h3>Manajemen Budidaya Kelapa Sawit</h3>
+        <p>STIK-BPDPKS 23</p>
+      </div>
+      <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+    </header>
+
+    <div class="wrap">
+      <h1>Pengendalian Hama, Penyakit, dan Gulma (H,P,G) pada TBM Sawit</h1>
+      <div class="accent-bar"></div>
+
+      <section class="card">
+        <p class="muted">
+          Pengendalian Hama, Penyakit, dan Gulma (H,P,G) adalah serangkaian kegiatan yang dilakukan untuk melindungi tanaman kelapa sawit muda (TBM) dari gangguan organisme pengganggu tanaman (OPT) seperti serangga, jamur, bakteri, dan gulma agar pertumbuhan vegetatif sawit tetap optimal.
+        </p>
+      </section>
+
+      <section class="card">
+        <h3>🌱 Tujuan Pengendalian H,P,G</h3>
+        <ul class="bullets">
+          <li>Menjaga tanaman TBM tetap sehat dan tumbuh normal.</li>
+          <li>Mencegah kehilangan tanaman akibat serangan hama atau penyakit.</li>
+          <li>Mengurangi kompetisi antara sawit dan gulma untuk air, cahaya, serta unsur hara.</li>
+          <li>Menjaga area kebun tetap bersih dan mudah diawasi.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>🪴 Identifikasi H, P, G</h3>
+        <p class="note">Kegiatan mengenali dan mencatat jenis serta tingkat serangan hama, penyakit, dan gulma di areal kebun.</p>
+        <ul class="bullets">
+          <li>Mengetahui jenis OPT yang menyerang.</li>
+          <li>Menentukan tingkat serangan ringan, sedang, atau berat.</li>
+          <li>Menjadi dasar untuk tindakan pengendalian yang tepat.</li>
+        </ul>
+        <p><strong>Contoh:</strong></p>
+        <ul class="bullets">
+          <li>Hama: ulat api, kumbang tanduk, tikus.</li>
+          <li>Penyakit: Ganoderma, bercak daun.</li>
+          <li>Gulma: teki, pakis, putri malu.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>🌿 Analisis H, P, G</h3>
+        <p class="note">Menganalisis hasil identifikasi untuk menentukan penyebab utama, pola penyebaran, dan tindakan pengendalian efektif.</p>
+        <ul class="bullets">
+          <li>Mengetahui faktor penyebab serangan.</li>
+          <li>Menentukan strategi pengendalian terpadu (PHT).</li>
+          <li>Menyusun rencana pengendalian sesuai tingkat serangan.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>🌾 Pembersihan Gulma</h3>
+        <p class="note">Menghilangkan tanaman pengganggu di sekitar pokok sawit agar tidak bersaing dalam air dan nutrisi.</p>
+        <p><strong>Cara:</strong></p>
+        <ul class="bullets">
+          <li>Manual: tebas/cangkul.</li>
+          <li>Mekanis: brush cutter atau mini tractor.</li>
+          <li>Kimia: herbisida sesuai dosis.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>🧴 Penyemprotan Tanaman</h3>
+        <p class="note">Mengaplikasikan pestisida atau fungisida untuk mengendalikan hama dan penyakit.</p>
+        <ul class="bullets">
+          <li>Pestisida nabati: serai, daun mimba.</li>
+          <li>Pestisida kimia: bila serangan berat.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>🌿 Rawat CPT (Circle, Path, TPH)</h3>
+        <ul class="bullets">
+          <li><strong>Circle:</strong> area pupuk di sekitar batang sawit.</li>
+          <li><strong>Path:</strong> jalur antar tanaman untuk akses kerja.</li>
+          <li><strong>TPH:</strong> tempat pengumpulan hasil panen.</li>
+        </ul>
+      </section>
+
+      <button class="copy" onclick="copyText()">📋 Salin Ringkasan</button>
+    </div>
+
+    <footer>© 2025 Upkeep TBM — STIK-BPDPKS 23</footer>
+  </main>
+
+  <script>
+    function copyText(){
+      const text = `🌿 Pengendalian H,P,G TBM Sawit\nTujuan: menjaga tanaman sehat & mengurangi gangguan OPT.\nLangkah: identifikasi, analisis, pembersihan gulma, penyemprotan, rawat CPT.`;
+      navigator.clipboard.writeText(text)
+        .then(()=>alert('✅ Ringkasan berhasil disalin'))
+        .catch(()=>alert('❌ Gagal menyalin.'));
+    }
+  </script>
+</body>
+</html>
